@@ -74,7 +74,7 @@ link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=13m04s[Tutorial Video - 13m04
 
 _This section applies to **all students**_
 
-1. Visit the NewcastleComputingScience/CSC8104-Quarkus github repo release page link:https://github.com/Adam-Booth/CSC8104-Quarkus/releases/tag/2022-Release[here].
+1. Visit the NewcastleComputingScience/CSC8104-Quarkus github repo release page https://github.com/NewcastleComputingScience/CSC8104-Quarkus/releases/tag/v1.0.0[here].
 2. Click on the *Source code (zip)* link to obtain the contacts-swagger quickstart
 3. Unzip the download to somewhere on your computer. Be aware this may take some time as there are many files and you are likely writing to your (networked) `H` drive.
 4. Open a Command Prompt, and go to the root directory in the contacts quickstart you just unzipped.
@@ -85,7 +85,7 @@ NOTE: You can find a Command Prompt from the Start menu by searching, or start P
 
 _This section applies to **all students**_
 
-Step through the instructions on the Contacts-Swagger quickstart page link:https://github.com/NewcastleComputingScience/CSC8104-Quarkus[here].
+Start the service by executing the command provided on the quickstart page link:https://github.com/NewcastleComputingScience/CSC8104-Quarkus[here].
 
 NOTE: A short demonstration of the sample application is provided link:https://youtu.be/yt8SX4CGnWs[here]. It is not necessary to watch this video but you may find it useful.
 
@@ -107,7 +107,7 @@ This section will show you how to create a copy of the 'contacts-swagger' exampl
 * Now you need to push this code to your git repository on GitHub.
 
     git add .
-    git commit -m "contacts-swagger added to repository"
+    git commit -m "Starter project added to repository"
     git push origin master
     
 * Note: Due to recent changes in Git, your default branch name may be called master or main. Therefore, be sure to check the default name of your branch and use that when pushing to GitHub.
