@@ -1,0 +1,50 @@
+= Enterprise Middleware Coursework
+
+This coursework covers the development of an enterprise application using Quarkus and is deployed to a PaaS cloud. 
+The coursework is designed to give students hands on experience with building enterprise applications.
+Furthermore, all the technologies used are production grade, given the students the experience and knowledge they need to build a real enterprise application.
+
+NOTE: This coursework was produced by Newcastle University (UK) in conjunction with Red Hat. It's available under an Open Source licence.
+However, the exact licence is still to be decided.
+
+If you want to run this coursework at your University, then we encourage you to do so.
+However, you would be advised to contact paul.robinson@redhat.com first.
+This will allow us to provide you with some support and also give you access to the private materials (model answer and marking scheme).
+
+We have provided all the materials needed, to deliver this course at your University. In particular the following materials are available:
+
+== Tutorial
+This document instructs the students how to setup the various accounts they require during the coursework.
+It also guides them through setting up a sample application and then deploying it to the Cloud.
+This sample application is then used to build upon during the coursework.
+
+link:./tutorial.asciidoc[View the tutorial document]
+
+There is also a video available to https://www.youtube.com/watch?v=2SkR8hDCpvA[watch here].
+In this video a member of staff, at Newcastle University, walks through the tutorial with the students.
+This video has a few Newcastle specific bits in, but could be valuable to your students anyway, providing they understand this caveat.
+
+== Coursework
+This document tells the students what they need to do during the coursework.
+
+link:./coursework.asciidoc[View the coursework document]
+
+== Model Answer
+The model answer shows a completed version of the coursework.
+This *MUST NOT* be show to the students, it's sole purpose is to educate teaching staff on what we think a good solution looks like. The model answer is in a private repo. You need to contact paul.robinson@redhat.com to gain access.
+
+https://github.com/NewcastleComputingScience/csc8104-model/tree/master/contacts-swagger[View model answer]
+
+== Marking Scheme
+There is also a suggested marking scheme.
+This is the one used by Newcaslte University.
+You are free to use it as is, modify it for your needs, or come up with an entirely new one.
+
+Contact paul.robinson@redhat.com to obtain this document.
+
+== Building docs
+The following command builds the html version of this coursework:
+
+    asciidoctor -a stylesheet=./stylesheets/riak.css ./coursework.asciidoc
+    asciidoctor -a stylesheet=./stylesheets/riak.css ./tutorial.asciidoc
+    asciidoctor -a stylesheet=./stylesheets/riak.css ./frequentlyaskedquestions.asciidoc

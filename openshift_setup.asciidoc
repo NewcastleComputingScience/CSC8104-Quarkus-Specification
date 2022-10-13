@@ -1,0 +1,81 @@
+= Deploying to OpenShift
+
+OpenShift 4 is RedHat's Platform as a Service (PaaS) offering. The system wraps around Kubernetes, and so some of the commands and terminology used refers to the underlying infrastructure. The system consists of deploying applications from images where we can easily recreate and scale up and down services. A service can consist of many different 'pods', which are instances of our application to permit distribution of load. For more information see link:https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/[What is Kubernetes?]. For your coursework, you will have a single service running which will contain your API and have a single running pod.
+
+Make sure that you fully complete the instructions listed here, up to the point where you must email Adam Booth (a.booth2@newcastle.ac.uk) with your Route information!
+
+// NOTE: Please check the limitations of the *Starter* accounts https://www.openshift.com/pricing/index.html[here]. In particular; "Your project resources sleep after 30 minutes of inactivity, and must sleep 18 hours in a 72 hour period".
+
+Once you have completed the instructions here you should expect your OpenShift resources to be similar to the following image.
+
+image::images/openshift-overview_quarkus.png["OpenShift Overview",align="center"]
+
+== Initial Setup
+
+=== Environment Setup
+
+link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=24m09s[Tutorial Video - 24m09s]
+
+At this stage you should have the accounts setup and the required applications installed to deploy your application to OpenShift. If you are not currently at this stage please refer to the link:./tutorial.asciidoc[tutorial] document.
+
+Once your OpenShift account has been successfully provisioned (as mentioned above), you will have the option to access the web console.
+
+
+=== GitHub Access Token [[github_token]]
+
+link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=25m47s[Tutorial Video - 25m47s]
+
+To permit OpenShift to access and view your private repositories, you must create a personal access token. This provides a secure method for an application to authenticate itself either over HTTPS calls or through the use of the Git API. To do this:
+
+1. Access https://github.com/settings/tokens
+2. Select 'Generate new token'
+3. Provide the token with the `repo` scope (Full control of private repositories), and give the token an appropriate description, such as 'OpenShift'
+
+IMPORTANT: Make sure you either copy the token or do not navigate away from this page for now! As GitHub states, you will only have access to the token while on that page
+
+=== Create a New Secret [[openshift_secret]]
+
+link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=27m00s[Tutorial Video - 27m00s]
+
+We need to create a secret using this GitHub token, which we can then use to permit builds from our source code.
+
+To do this, navigate to the Secrets page shown on the OpenShift web interface. Once on this page, press the 'Create' button in the top right section and select 'Source Secret'. Set the secret name to 'CSC8104' and enter your GitHub username into the Username text field. Finally, paste the access token created in the previous step into the 'Password or Token' field and click create.
+
+This will create an access token which will be used to fetch, build and deploy your application from your private repository.
+
+
+== Deploying the Quickstart
+
+link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=27m54s[Tutorial Video - 27m54s]
+
+The next stage is to deploy the application. To do this, press the 'Add+' button shown in the OpenShift web interface and then select 'Import from Git'. Paste in your private GitHub repository URL and then expand the 'Show advanced Git options'. In the advanced options, press the 'Select Secret Name' dropdown and select the previously generated secret. This will enable OpenShift to access the repository and determine the build type.
+
+After selecting the source secret, you should now see that OpenShift has selected a build image and pre-configured various route and deployment options. Leave all these options as provided and press deploy. This will generate a new build configuration and deploy your application on the platofrm accessible by the route provided. 
+
+TIP: You can see the status of the current application by visiting the *Project* tab.
+
+WARNING: You have been given access to create multiple pods to allow for rolling deployment. Please *DO NOT* scale your system to use multiple pods to run your application.
+
+To access the public URL given for your application, go to *Project -> Route* and copy the Location value.
+
+IMPORTANT: *Once you have completed this stage and have a link to the route for your service, please email Adam Booth (a.booth2@newcastle.ac.uk) as soon as possible! I will append this to the document https://github.com/NewcastleComputingScience/csc8104-assignment[here], where you will be able to find links to your colleagues services for Part III*
+
+IMPORTANT: Your application may not be available as soon as you start your route. Navigate to *Project -> Pod -> `running pod` -> Logs* to see the current output from your running service.
+
+=== Update Deployment
+
+link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=31m26s[Tutorial Video - 31m26s]
+
+From here on out, updating your application is as simple as committing to your GitHub repository. You can Start a new build by navigating to the Builds section within the web interface and selecting your build. Then in the Actions menu, click *Start Build*. This will use your most recent version of source code on GitHub to create a new image and add this to the image stream with the `latest` tag. This then triggers the service to attempt a rolling deployment. For more information see link:https://docs.openshift.com/dedicated/dev_guide/deployments/deployment_strategies.html[here].
+
+=== Redeploy Your Application
+
+Due to using the OpenShift developer sandbox in the module, your services will be deallocated automatically after eight hours. Although these restrictions will be removed towards the end of the module, you will still need to redeploy your application when you are working on your coursework for part 1 and part 2.
+
+To redeploy your application, go to *Project -> Deployment -> csc8104-build-stream* in OpenShift and press the up arrow once. This will automatically deploy a new pod for your application and will remain available for eight hours. 
+
+A demonstration of redeploying the application is provided link:https://www.youtube.com/watch?v=kD0C306-3Tg[here].
+
+// === Troubleshooting
+//
+// Make sure you have read all of the details here, as all of the steps are outlined in detail. If you can not fix your issue then ask a demonstrator in a practical, or email Adam Cattermole (a.cattermole@newcastle.ac.uk) for remote assistance.

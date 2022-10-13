@@ -1,0 +1,243 @@
+= Enterprise Middleware Coursework
+
+== Outline
+This coursework is designed to give you experience building enterprise applications and deploying them to the Cloud. You will build a real-world application using real enterprise technologies. This coursework provides you with an opportunity to work on an entire application, from the data-storage through to the web frontend. As a result you will need to become familiar with a wide range of technologies. It is important that you start the work early and ask for help when needed. By completing this coursework, you will gain some useful experience and skills.
+
+Before attempting this coursework, please complete link:https://github.com/NewcastleComputingScience/enterprise-middleware-coursework/blob/master/tutorial.asciidoc[this tutorial].
+
+In Part One you will build a simple service, hosted on a Platform as a Service Cloud. The service should be accessible through a RESTful JSON api and accompanied by a selection of tests to demonstrate that it satisfies the provided requirements.
+
+In Part Two you will implement some advanced functionality upon the base service from Part One, such as cascading updates for related entities and a transactional endpoint.
+
+In Part Three you will create a new, more complex, service. It will make requests to your Part One service, along with those of two colleagues. This service should also be accompanied by more tests and JSON endpoints.
+// These endpoints, and their responses, should match those expected by an link:https://angularjs.org/[AngularJS] client application, which will be provided.
+// If done correctly, you will have a functioning single-page web application (SPA) after this step. It should be noted however that integration with the frontend in the final part of the coursework is entirely optional however.
+You should end up with a fully functioning booking service for all 3 commodities.
+
+//In Part Four you will implement some advanced functionality upon the complex service from Part Three. Namely: using caching to reduce _upstream_ requests to the simple Part One services.
+
+IMPORTANT: You must complete the provided Tutorial before attempting this coursework. There are a number of pre-requisite steps in the tutorial that must be done for the coursework to function.
+
+== Technologies
+This coursework covers a large number of technologies. The challenge here is to learn the right bits of each technology in order to complete the coursework.
+* *Quarkus*. A full-stack Java framework used to build highly scalable enterprise applications.
+* *JPA*. The Java Persistence API provides a Java API onto your application's data.
+* *JTA*. The Java Transaction API is a general API for managing transactions in Java. It allows you to start, commit and rollback transactions in a resource neutral way.
+* *JSON*. This is the data serialization and interchange format used by Javascript and commonly returned by HTTP APIs.
+* *Bean Validation*. This technology allows you to specify constraints on your data and assists with validation.
+* *JUnit and REST Assured*. These tools will be used to test your REST endpoints.
+* *Maven*. Your application will be built and deployed with this tool.
+* *OpenShift*. This is the Platform as a Service (PaaS) that you will use to deploy your application to the Cloud.
+* *JAX-RS*. This technology provides the API for developing REST services. You will use this technology to communicate between distributed components of your application (web-interfaces & other services).
+* *Git*. This is a distributed version control system and will be used to backup your code and for deploying it to OpenShift.
+* *Swagger*. Swagger is a simple yet powerful representation of your RESTful API. Using Java @Annotations Swagger will generate documentation for JAX-RS endpoints as part of the project build process.
+
+== Project Requirements
+
+
+*Building your work*
+==========================
+For this project you *must* use a link:http://maven.apache.org/[Maven] build for your application. You may use the Maven build file (pom.xml) provided as part of the tutorial.
+==========================
+
+*Storing your work*
+==========================
+You should save your work using the link:http://git-scm.com/[Git] version control system, regularly committing changes and pushing to the provided link:http://github.com/[GitHub] repository.
+
+You should push commits of your coursework regularly to your GitHub repo. It is a good idea to do so every time you get a small piece of functionality working. This ensures that you can move back to a working state if you get in a mess. It also ensures that you have a backup and that the demonstrators can view your code and track progress.
+
+TIP: You will be awarded a considerable number of marks for your distribution and use of version control. We expect to see a steady flow of sensible commits to Github over the coursework period.
+==========================
+
+*Testing your work*
+==========================
+You *must* produce link:https://rest-assured.io[REST Assured] tests for testing your application. These tests will be executed as part of your Maven build.
+==========================
+
+== General Process
+You should build on the _CSC8104 Quickstart Project_ from the tutorial. You do not have time to create a new application from scratch. Don't worry about renaming the packages or the OpenShift application name, doing so is likely to get you into a mess.
+
+The easiest way to work, is to run your application locally during development. Only create new builds from your code in OpenShift periodically, when you have a new set of features working and all your tests pass. This is especially important for part three, as you will cause your colleagues problems if your service becomes unavailable.
+
+== Notes
+
+During parts 1 & 2 you will only test your API through REST Assured tests and one of the other methods presented to you during the tutorial (The Swagger documentation or CURL).
+
+
+== Part 1
+
+Produce an API offering either Taxi, Hotel or Flight bookings. You have been allocated a specific service type (see the end of the tutorial document). Your API *must* conform to link:http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api[RESTful design principles] and should return link:http://json.org/example[JSON]. Finally you must construct REST Assured tests to demonstrate that your service satisfies those link:./stories[user stories] relevant to your allocated service.
+
+IMPORTANT: You have been allocated a service to implement. See the allocation you have been emailed for details. You MUST implement the service that you have been allocated.
+
+The following diagram shows the architecture you will need to implement for your application:
+
+image::images/architecture-p1_quarkus.png["Part 1 architechture diagram",align="center"]
+
+Through this architecture you can support multiple different forms of client to the service. Here your automated tests and Swagger documentation act as the primary examples, but you could quite easily also develop a mobile application or website using the same REST services.
+
+* *Unit Tests*. These are implemented using the REST Assured testing framework and send requests to your REST services, validating the responses against some expected response.
+* *REST Services*. These are implemented using link:http://docs.jboss.org/resteasy/docs/3.0.16.Final/userguide/html/index.html[RESTEasy] (a JBoss implementation of the JAX-RS Java Standards Recommendation (JSR)) and provide a service interface to your application. These services are responsible for managing bookings, users and taxis/hotels/flights.
+* *Persistence layer*. This layer provides a Java interface for accessing the data in the database, using the Java Persistence API (JPA).
+* *Database*. This is where your data is stored. Your application won't access this directly as it will use JPA to interface with the data.
+
+=== RESTful Resources
+You will need to produce three RESTful resources:
+
+1. Customer. (A user)
+2. Taxi/Hotel/Flight. (A commodity)
+3. Booking. (A relationship between a user and a commodity, with additional attributes)
+
+Your API should provide endpoints to perform the following actions on your resources:
+
+* Create & List Customers.
+* Create & List Taxis, Rooms or Flights.
+* Create, List & Cancel Bookings.
+
+You must document your endpoints using the link:https://download.eclipse.org/microprofile/microprofile-open-api-1.0/microprofile-openapi-spec.html[Open API Specification] and link:https://github.com/swagger-api/swagger-core/wiki/Swagger-2.X---Annotations[Swagger Annotations] including:
+
+* Their purpose.
+* Their expected URL structure & request method.
+* Their expected request values.
+* Their expected response format.
+* Possible HTTP response codes and the reasons for them.
+
+
+
+This is essential for any third-party who wishes to use your service. You will need to refer any colleagues using your service in Part 3 to your Swagger doc page, which will be deployed to Openshift along with your service. An example of good Swagger documentation is included in the base quickstart.
+
+TIP: Much of the information about each REST endpoint, such as URL structure and request method, may be automatically discovered by Swagger. All Swagger @Annotations should be included in the relevant `*RestService` class.
+
+TIP: If you are unfamiliar with the specifics of RESTful APIs there are some good resources available link:https://docs.oracle.com/javaee/7/tutorial/jaxrs.htm[here] & link:https://quarkus.io/guides/rest-json[here].
+
+=== Persistence Layer
+
+You will probably need an Entity for each of your resources.
+
+1. Customer. A bean to hold the data you wish to collect about each customer.
+2. Taxi/Flight/Hotel. A bean to hold the data you wish to collect about each item you have available for booking.
+3. Booking. A bean representing the booking and linking to the customer who made the booking and to the item being booked.
+
+TIP: Keep these entities simple. Just provide the minimum information required to fulfil the requirements. Use @Annotations, like those found in the base _contacts-swagger_ `Contact` class, to specify validation constraints on your information (like the minimum length of a name). You may however wish to read about link:https://docs.oracle.com/javaee/7/tutorial/persistence-intro001.htm[entity relationship @Annotations].
+
+TIP: When you are testing your application you may find it useful to pre-populate your database with a number of example entities. One way to achieve this is to add SQL insert statements into `src/main/resources/import.sql`.
+
+TIP: When you are testing your application you will find it useful to view the queries run against your database. You can enable logging of this information by setting the `quarkus.hibernate-orm.log.sql=true` in the application.properties file.
+
+=== Report Hints
+* Describe the composition of your service, including each of the JAX-RS services and how they interact. You might like to draw a diagram like the one above to help explain your architecture.
+
+=== Testing Hints
+
+* Can you create and return all Entity types?
+* Remember to test error handling by attempting to create several invalid entities and failing any test where an expected `Exception` is *not* thrown.
+* Can you cancel and remake bookings?
+
+== Part 2
+You will now need to add some advanced features to your base REST resources from Part One.
+These features are:
+
+* REST endpoints to allow for the deletion of Customer and Commodity (Taxi/Hotel/Flight) resources.
+* _Cascading_ deletion of related entities. Specifically, if a Commodity entity is deleted then any bookings made *for* it should also be deleted. Likewise, if a Customer entity is deleted, any bookings made *by* it should also be deleted.
+* A `GuestBooking` transactional endpoint which creates a customer and a booking in a single transaction.
+
+IMPORTANT: The automatic deletion of related entities *must* be handled with JPA link:https://docs.oracle.com/javaee/7/tutorial/persistence-intro001.htm[Entity relationship @Annotations] (e.g. `@ManyToOne`, `@ManyToMany` etc...), which are provided by link:https://docs.jboss.org/hibernate/stable/annotations/reference/en/html_single/#entity-mapping-association[Hibernate]. You should therefore implement all relationships between entities using these annotations, even if you did not do so in Part 1.
+
+TIP: This will mean that you should store full objects (or lists of objects) in your models, rather than just Ids. You should be careful to familiarise yourself with the link:https://github.com/FasterXML/jackson-annotations/wiki/Jackson-Annotations[Jackson JSON annotations] if you have not already (particularly `@JsonIgnore` which prevents the "recursive" definition problem).
+
+=== Transactional Endpoint.
+
+You must create a `GuestBooking` Bean and RestService class.
+The Bean is not persisted and should not be a Hibernate `@Entity`.
+It should simply contain fields (and getters and setters) for a `Customer` object and a `Booking` object.
+Its purpose is simply to allow the link:http://fasterxml.com/[Jackson] JSON library to deserialize a request Body containing both a Customer and a Booking.
+
+TIP: You may leave the `customer` field of a `Booking` object's JSON blank, then use `setCustomer(Customer c)` to set a `Booking` customer to be a newly created `Customer` object, before attempting to persist the `Booking` itself.
+
+Although Quarkus provides annotations to easily mark endpoints as transactional, resulting in automated transaction management, it is important for the `GuestBookingRestService` service to use the JTA API to manually demarcate the transaction. The Quarkus guide link:https://quarkus.io/guides/transaction[here] provides good information on how to do this using the legacy JTA approach. This is an important aspect of the coursework and failure to demonstrate the use of manual transaction demarcation will result in many marks being deducted.
+
+Your `GuestBookingRestService` must provide a single method which accepts a `GuestBooking` parameter and serves a *POST* request.
+This method should then use the `CustomerService` and `BookingService` classes to persist the appropriate fields of the `GuestBooking` object inside a `UserTransaction` and return a `Response` containing the `Booking`, and a status of `201` if successful.
+
+If either Entity should fail to be persisted, you should rollback the transaction with an appropriate error message.
+
+=== Report Hints
+
+* Why are transactions useful here? What scenario do they help to prevent.
+* What is the advantage of the JTA? How might it help when using multiple distinct transactional services?
+* Discuss the benefits and drawbacks of using JPA @Annotations to automatically handle entity relationships. Highlight any pitfalls you encountered.
+
+=== Testing Hints
+
+* If you delete a Customer or Commodity, are all their associated bookings also deleted?
+* If you provide a valid Customer but an invalid Booking to your `GuestBooking` endpoint, is the Customer present in the database?
+
+== Part 3
+You will now need to integrate three _commodity_ REST resources to produce a fourth, aggregate, resource: a TravelAgent resource. You will use your own resources along with two more made available through the APIs of your colleagues.
+
+You will do this using the link:https://quarkus.io/guides/rest-client-reactive[REST client], as exemplified by the `contact-swagger` quickstart's `area` package.
+
+The resources you need to integrate are:
+
+* 1 x Hotel resource
+* 1 x Taxi resource
+* 1 x Flight resource
+
+You must ensure that either every part of a booking is made, or no parts of the booking are made. Remember, each part of the booking can be cancelled using the provided cancel operation. For example, the user would not want to book a flight, if they didn't have somewhere to stay at the destination.
+This will allow you to easily control which booking fails and which succeeds. You should set up a scenario where the first two bookings succeed and the remaining booking fails. Your TravelAgent resource should detect this failure and cancel the previous bookings that succeeded.
+
+IMPORTANT: It is very important that the user does not end up with a partial booking. Otherwise they may end up paying for a flight, without having a hotel to stay in.
+
+image::images/architecture-p2_quarkus.png["Part 2 architechture diagram",align="center"]
+
+The diagram above shows the type of interaction that you should have achieved by completing part 3.
+
+TIP: You may find that you are ready to use your colleagues’ services before they are ready to make them available. If this happens then you can temporarily use your own service three times and then switch to your colleagues’ services when they become available.
+
+TIP: You may also find it hard to utilize the exact service types specified above, due to the progress of your colleagues. In this case you may duplicate the service types; for example, two Taxi services and one Flight service. However, you must make sure that the two services you select are offered by two different colleagues!
+
+TIP: You should create a Customer record in each of your colleague's applications to represent your travel agent, and make all booking's using this customer. You should *not* try and create a new customer with each base service for every TravelAgent booking. This makes the TravelAgent service more complex to implement, and is not how a real travel agent would work in any case.
+
+TIP: When storing your TravelAgentBooking locally, as with part two, you can link the Booking for your local commodity using link:https://docs.oracle.com/javaee/7/tutorial/persistence-intro001.htm[Entity relationship @Annotations], and simply store the ID's of the upstream bookings locally.
+
+=== RESTful Resource
+
+Your TravelAgent resource should provide endpoints to perform the following actions:
+
+* Create, List & Cancel aggregate Bookings.
+
+As with Part 1, you should document your API endpoints using Swagger @Annotations. You should take care to detail the possible failure responses, including their causes. This means that error handling may be tests.
+
+=== Report Hints
+* What problems did you have utilising your colleagues’ services? How would these problems be exacerbated had the producers of these services not been in the same room?
+* What problems did you have offering your service to your colleagues?
+
+=== Testing Hints
+
+* Can you retrieve a list of TravelAgent bookings for a given Customer?
+* If a booking is invalid for just one of the base commodities, are the bookings made with other remote services successfully removed?
+* Can you create a TravelAgent booking?
+
+== Submission Guidelines
+
+=== Demonstration
+Prior to submission you will provide a 10-15 minute demonstration to one of the Course Demonstrators. You will be expected to describe your technical solution and discuss your personal experiences throughout the project.
+
+A sign-up sheet for demonstration slots will be sent via email during the first week of practical sessions. It is very important that you demonstrate your work, failing to do so may result in a loss of marks.
+
+=== Coursework submission
+You must submit all work via the coursework submission system (NESS).
+This should constitute a zip file containing the project source code and Maven build scripts. We will use this zip file to test your submission, so it should contain everything necessary to build and test your project.
+
+You should also submit a short report via NESS (roughly three pages) summarising the work carried out on this project, and an evaluation of how much you achieved. We are particularly interested in any assumptions you made, and how they motivated particular design decisions. You should also provide a brief discussion of your personal experience of the development process; e.g. which aspects of the project did you find particularly easy/hard?
+
+We have provided a list of things you should cover in your report in the "Report Hints" sections of this document.
+
+== Finally
+Demonstrators will be available in your cluster rooms during all practical sessions. You should go and see them if you are having any difficulties. This includes understanding what you have to do.
+
+Discussion Boards will also be available for CSC8104 in Canvas (http://canvas.ncl.ac.uk) and Teams. You may post any questions about the tutorial or coursework assignment here, and the discussion boards will be monitored by Course Demonstrators. Also, any question which demonstrators encounter frequently (either on Teams or in practical) will be placed in a *Frequently Asked Questions* document which we maintain https://github.com/NewcastleComputingScience/enterprise-middleware-coursework/blob/master/frequentlyaskedquestions.asciidoc[here]. Before asking a question we encourage you to check both these places to see if it has already been answered.
+
+In particular, notice the https://github.com/NewcastleComputingScience/enterprise-middleware-coursework/blob/master/frequentlyaskedquestions.asciidoc#i-cant-work-out-how-to-do-[answer] which refers to documentation. The use of 3rd party documentation is absolutely *essential* throughout this coursework, and demonstrators may often answer questions by pointing you to the relevant websites.
+
+TIP: If you see a question on the discussion boards you know how to answer, we strongly encourage you to assist your colleagues!
