@@ -133,6 +133,13 @@ TIP: When you are testing your application you will find it useful to view the q
 * Remember to test error handling by attempting to create several invalid entities and failing any test where an expected `Exception` is *not* thrown.
 * Can you cancel and remake bookings?
 
+=== Useful Guides and Resources
+* link:https://www.youtube.com/watch?v=I3-tJuhHSoI[Introduction to Quarkus Video]
+* link:https://quarkus.io/guides/cdi[Contexts and Dependency Injection]
+* link:https://quarkus.io/guides/rest-json[Writing JSON REST Services]
+* link:https://quarkus.io/guides/validation[Validation with Hibernate Validator]
+
+
 == Part 2
 You will now need to add some advanced features to your base REST resources from Part One.
 These features are:
@@ -171,6 +178,9 @@ If either Entity should fail to be persisted, you should rollback the transactio
 
 * If you delete a Customer or Commodity, are all their associated bookings also deleted?
 * If you provide a valid Customer but an invalid Booking to your `GuestBooking` endpoint, is the Customer present in the database?
+
+=== Useful Guides and Resources
+* link:https://quarkus.io/guides/transaction[Using Transactions In Quarkus]
 
 == Part 3
 You will now need to integrate three _commodity_ REST resources to produce a fourth, aggregate, resource: a TravelAgent resource. You will use your own resources along with two more made available through the APIs of your colleagues.
@@ -217,6 +227,9 @@ As with Part 1, you should document your API endpoints using Swagger @Annotation
 * Can you retrieve a list of TravelAgent bookings for a given Customer?
 * If a booking is invalid for just one of the base commodities, are the bookings made with other remote services successfully removed?
 * Can you create a TravelAgent booking?
+
+=== Useful Guides and Resources
+* link:https://quarkus.io/guides/rest-client-reactive[Using the REST Client]
 
 == Submission Guidelines
 
