@@ -110,9 +110,11 @@ This section will show you how to create a copy of the 'contacts-swagger' exampl
     git commit -m "Starter project added to repository"
     git push origin master
     
-* Note: Due to recent changes in Git, your default branch name may be called master or main. Therefore, be sure to check the default name of your branch and use that when pushing to GitHub.
-
 * You can use a similar method to add new files or changes, commit these changes, and push your commits to the remote repository.
+
+WARNING: There are two directories, .mvn and .s2i, which are required when deploying to OpenShift. Your operating system may hide these by default and you should take care when copying files to ensure that these directories are included. If they are not included, your deployment will fail, resulting in a 'CrashLoopBackOff' error when using OpenShift.
+
+WARNING: Due to recent changes in Git, your default branch may be named master or main. Therefore, be sure to check the default name of your branch when using the above commands.
 
 TIP: If you are new to Git, you should read Pro Git. Chapters 1-3 should cover all the functionality required for this coursework.  Available at: http://git-scm.com/book
 
