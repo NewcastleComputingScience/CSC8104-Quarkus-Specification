@@ -210,6 +210,8 @@ TIP: You should create a Customer record in each of your colleague's application
 
 TIP: When storing your TravelAgentBooking locally, as with part two, you can link the Booking for your local commodity using link:https://docs.oracle.com/javaee/7/tutorial/persistence-intro001.htm[Entity relationship @Annotations], and simply store the ID's of the upstream bookings locally.
 
+WARNING: The starter project was configured in such a way to allow you to use DBeaver to access your in-memory database. This configuration can cause issues when deploying your application to the cloud. To configure your database for part 3, you will need to remove the try/catch statement found in the Application.java file (lines 15 - 19). You will also need to update the `quarkus.datasource.jdbc.url` property found in the application.properties file to `quarkus.datasource.jdbc.url=jdbc:h2:mem:default;DB_CLOSE_DELAY=-1`. Once you have made these changes, DBeaver will no longer be able to access your database.
+
 === RESTful Resource
 
 Your TravelAgent resource should provide endpoints to perform the following actions:
