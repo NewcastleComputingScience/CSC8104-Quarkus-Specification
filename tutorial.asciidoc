@@ -56,11 +56,9 @@ _This section of the tutorial only applies to students working on *their own* ma
 
 This coursework depends upon several software packages / development tools. You must ensure you follow the instructions to install the following:
 
-* link:https://jdk.java.net/java-se-ri/12[Java 12]
+* link:https://jdk.java.net/java-se-ri/17[Java 17]
 * link:https://git-scm.com/[Git]
 * link:https://maven.apache.org/[Maven]
-
-NOTE: It is a strict requirement that you use Java 11 or 12 to ensure compatibility for this coursework. Using higher versions of Java can cause errors in your deployment. If you are seeing build errors, check that your default Java version is Java 11 or 12.
 
 == Run Example
 
