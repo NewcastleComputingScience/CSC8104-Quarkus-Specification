@@ -3,7 +3,7 @@
 == Outline
 This coursework is designed to give you experience building enterprise applications and deploying them to the Cloud. You will build a real-world application using real enterprise technologies. This coursework provides you with an opportunity to work on an entire application, from the data-storage through to the web frontend. As a result you will need to become familiar with a wide range of technologies. It is important that you start the work early and ask for help when needed. By completing this coursework, you will gain some useful experience and skills.
 
-Before attempting this coursework, please complete link:https://github.com/NewcastleComputingScience/enterprise-middleware-coursework/blob/master/tutorial.asciidoc[this tutorial].
+Before attempting this coursework, please complete link:https://github.com/NewcastleComputingScience/CSC8104-Quarkus-Specification/blob/main/tutorial.asciidoc[this tutorial].
 
 In Part One you will build a simple service, hosted on a Platform as a Service Cloud. The service should be accessible through a RESTful JSON api and accompanied by a selection of tests to demonstrate that it satisfies the provided requirements.
 
