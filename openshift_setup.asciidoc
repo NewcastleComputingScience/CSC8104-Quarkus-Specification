@@ -39,7 +39,7 @@ link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=27m00s[Tutorial Video - 27m00
 
 We need to create a secret using this GitHub token, which we can then use to permit builds from our source code.
 
-To do this, navigate to the Secrets page shown on the OpenShift web interface. Once on this page, press the 'Create' button in the top right section and select 'Source Secret'. Set the secret name to 'CSC8104' and enter your GitHub username into the Username text field. Finally, paste the access token created in the previous step into the 'Password or Token' field and click create.
+To do this, navigate to the Secrets page shown on the OpenShift web interface. Once on this page, press the 'Create' button in the top right section and select 'Source Secret'. Set the secret name to 'csc8104' and enter your GitHub username into the Username text field. Finally, paste the access token created in the previous step into the 'Password or Token' field and click create.
 
 This will create an access token which will be used to fetch, build and deploy your application from your private repository.
 

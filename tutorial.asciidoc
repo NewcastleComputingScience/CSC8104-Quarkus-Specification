@@ -31,7 +31,7 @@ TIP: GitHub is a very popular service, and you are quite likely to use it in you
 OpenShift is a Platform as a Service (PaaS) Cloud offered by Red Hat.
 It can host many types of applications, but for this coursework you will be using it to host your Quarkus REST service.
 
-You will be using the OpenShift Developer Sandbox to develop and test your applications. The developer sandbox automatically deallocates your application after 8 hours. This restriction will be removed from your account towards the end of the module. 
+You will be using the OpenShift Developer Sandbox to develop and test your applications. The developer sandbox automatically deallocates your application after 8 hours. This restriction will be removed from your account towards the end of the module.
 
 To create a Red Hat account and access the developer sandbox environment:
 
@@ -106,13 +106,11 @@ This section will show you how to create a copy of the 'contacts-swagger' exampl
 
     git add .
     git commit -m "Starter project added to repository"
-    git push origin master
-    
+    git push origin main
+
 * You can use a similar method to add new files or changes, commit these changes, and push your commits to the remote repository.
 
 WARNING: There are two directories, .mvn and .s2i, which are required when deploying to OpenShift. Your operating system may hide these by default and you should take care when copying files to ensure that these directories are included. If they are not included, your deployment will fail, resulting in a 'CrashLoopBackOff' error when using OpenShift.
-
-WARNING: Due to recent changes in Git, your default branch may be named master or main. Therefore, be sure to check the default name of your branch when using the above commands.
 
 TIP: If you are new to Git, you should read Pro Git. Chapters 1-3 should cover all the functionality required for this coursework.  Available at: http://git-scm.com/book
 
@@ -175,14 +173,14 @@ To give you an example of how you might use cURL to see what your API is doing, 
 
 * to see a list of all contacts returned, formatted as JSON and accompanied by all HTTP headers.
 
-    curl -v http://localhost:8080/api/contacts/
+    curl -v http://localhost:8080/contacts/
 
 * to create a new contact.
 
 // ** Unix/Command Prompt:
 
     curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" -d "{\"firstName\": \"Alice\",\"lastName\": \"Bob\",
-\"email\": \"alice@bob.com\",\"phoneNumber\": \"(231) 111-1111\",\"birthDate\": \"1982-10-26\"}" "http://localhost:8080/api/contacts"
+\"email\": \"alice@bob.com\",\"phoneNumber\": \"(231) 111-1111\",\"birthDate\": \"1982-10-26\"}" "http://localhost:8080/contacts"
 
 // ** PowerShell:
 
@@ -192,7 +190,7 @@ To give you an example of how you might use cURL to see what your API is doing, 
 //       `"email`": `"alice@bob.com`",
 //       `"phoneNumber`": `"(231) 111-1111`",
 //       `"birthDate`": `"1982-10-26`"
-//     }" "http://localhost:8080/api/contacts"
+//     }" "http://localhost:8080/contacts"
 
 The *-v* switch instructs curl to display all possible information, whilst the *-X* switch allows you to specify the HTTP method to be used and *-d* the data to be sent.
 
