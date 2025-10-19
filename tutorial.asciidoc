@@ -1,6 +1,6 @@
-= Enterprise Middleware Coursework - Tutorial
+= Enterprise Software and Services Coursework - Tutorial
 
-This tutorial guides you through the necessary preparation required to begin your Enterprise Middleware coursework.
+This tutorial guides you through the necessary preparation required to begin your Enterprise Software and Services coursework.
 It is very important that you have completed this and are comfortable with the example, before beginning the coursework.
 
 == Create Accounts
@@ -72,7 +72,7 @@ link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=13m04s[Tutorial Video - 13m04
 
 _This section applies to **all students**_
 
-1. Visit the NewcastleComputingScience/CSC8104-Quarkus github repo release page https://github.com/NewcastleComputingScience/CSC8104-Quarkus/releases/tag/v1.0.2[here].
+1. Visit the NewcastleComputingScience/CSC8104-Quarkus github repo release page https://github.com/NewcastleComputingScience/CSC8104-Quarkus/releases/tag/v1.0.3[here].
 2. Click on the *Source code (zip)* link to obtain the contacts-swagger quickstart
 3. Unzip the download to somewhere on your computer. Be aware this may take some time as there are many files and you are likely writing to your (networked) `H` drive.
 4. Open a Command Prompt, and go to the root directory in the contacts quickstart you just unzipped.
