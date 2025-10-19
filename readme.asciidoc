@@ -1,4 +1,4 @@
-= Enterprise Middleware Coursework
+= Enterprise Software and Services Coursework
 
 This coursework covers the development of an enterprise application using Quarkus and is deployed to a PaaS cloud. 
 The coursework is designed to give students hands on experience with building enterprise applications.
