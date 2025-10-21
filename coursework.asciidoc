@@ -1,6 +1,6 @@
-= Enterprise Software and Services Coursework
+# Enterprise Software and Services Coursework
 
-== Outline
+## Outline
 This coursework is designed to give you experience building enterprise applications and deploying them to the Cloud. You will build a real-world application using real enterprise technologies. This coursework provides you with an opportunity to work on an entire application, from the data-storage through to the web frontend. As a result you will need to become familiar with a wide range of technologies. It is important that you start the work early and ask for help when needed. By completing this coursework, you will gain some useful experience and skills.
 
 Before attempting this coursework, please complete link:https://github.com/NewcastleComputingScience/CSC8104-Quarkus-Specification/blob/main/tutorial.asciidoc[this tutorial].
@@ -10,59 +10,57 @@ In Part One you will build a simple service, hosted on a Platform as a Service C
 In Part Two you will implement some advanced functionality upon the base service from Part One, such as cascading updates for related entities and a transactional endpoint.
 
 In Part Three you will create a new, more complex, service. It will make requests to your Part One service, along with those of two colleagues. This service should also be accompanied by more tests and JSON endpoints.
-// These endpoints, and their responses, should match those expected by an link:https://angularjs.org/[AngularJS] client application, which will be provided.
-// If done correctly, you will have a functioning single-page web application (SPA) after this step. It should be noted however that integration with the frontend in the final part of the coursework is entirely optional however.
+
 You should end up with a fully functioning booking service for all 3 commodities.
 
-//In Part Four you will implement some advanced functionality upon the complex service from Part Three. Namely: using caching to reduce _upstream_ requests to the simple Part One services.
+**IMPORTANT:** You must complete the provided Tutorial before attempting this coursework. There are a number of pre-requisite steps in the tutorial that must be done for the coursework to function.
 
-IMPORTANT: You must complete the provided Tutorial before attempting this coursework. There are a number of pre-requisite steps in the tutorial that must be done for the coursework to function.
+*As part of modern DevOps practices, you are encouraged to think about how your services could be built, tested, and deployed automatically — for example using continuous integration and deployment workflows.*
 
-== Technologies
+## Technologies
 This coursework covers a large number of technologies. The challenge here is to learn the right bits of each technology in order to complete the coursework.
-* *Quarkus*. A full-stack Java framework used to build highly scalable enterprise applications.
-* *JPA*. The Java Persistence API provides a Java API onto your application's data.
-* *JTA*. The Java Transaction API is a general API for managing transactions in Java. It allows you to start, commit and rollback transactions in a resource neutral way.
-* *JSON*. This is the data serialization and interchange format used by Javascript and commonly returned by HTTP APIs.
-* *Bean Validation*. This technology allows you to specify constraints on your data and assists with validation.
-* *JUnit and REST Assured*. These tools will be used to test your REST endpoints.
-* *Maven*. Your application will be built and deployed with this tool.
-* *OpenShift*. This is the Platform as a Service (PaaS) that you will use to deploy your application to the Cloud.
-* *JAX-RS*. This technology provides the API for developing REST services. You will use this technology to communicate between distributed components of your application (web-interfaces & other services).
-* *Git*. This is a distributed version control system and will be used to backup your code and for deploying it to OpenShift.
-* *Swagger*. Swagger is a simple yet powerful representation of your RESTful API. Using Java @Annotations Swagger will generate documentation for JAX-RS endpoints as part of the project build process.
 
-== Project Requirements
+- **Quarkus**. A full-stack Java framework used to build highly scalable enterprise applications.  
+- **JPA**. The Java Persistence API provides a Java API onto your application's data.  
+- **JTA**. The Java Transaction API is a general API for managing transactions in Java. It allows you to start, commit and rollback transactions in a resource neutral way.  
+- **JSON**. This is the data serialization and interchange format used by Javascript and commonly returned by HTTP APIs.  
+- **Bean Validation**. This technology allows you to specify constraints on your data and assists with validation.  
+- **JUnit and REST Assured**. These tools will be used to test your REST endpoints.  
+- **Maven**. Your application will be built and deployed with this tool.  
+- **OpenShift**. This is the Platform as a Service (PaaS) that you will use to deploy your application to the Cloud.  
+- **JAX-RS**. This technology provides the API for developing REST services. You will use this technology to communicate between distributed components of your application (web-interfaces & other services).  
+- **Git**. This is a distributed version control system and will be used to backup your code and for deploying it to OpenShift.  
+- **Swagger**. Swagger is a simple yet powerful representation of your RESTful API. Using Java @Annotations Swagger will generate documentation for JAX-RS endpoints as part of the project build process.  
+- **Containerization (optional)**. Modern enterprise services are often packaged as containers for deployment and scaling. While not required, you may explore how Quarkus integrates with container platforms such as OpenShift or Docker as part of continuous deployment workflows.
 
+## Project Requirements
 
-*Building your work*
-==========================
+### Building your work
 For this project you *must* use a link:http://maven.apache.org/[Maven] build for your application. You may use the Maven build file (pom.xml) provided as part of the tutorial.
-==========================
 
-*Storing your work*
-==========================
+### Storing your work
 You should save your work using the link:http://git-scm.com/[Git] version control system, regularly committing changes and pushing to the provided link:http://github.com/[GitHub] repository.
 
 You should push commits of your coursework regularly to your GitHub repo. It is a good idea to do so every time you get a small piece of functionality working. This ensures that you can move back to a working state if you get in a mess. It also ensures that you have a backup and that the demonstrators can view your code and track progress.
 
-TIP: You will be awarded a considerable number of marks for your distribution and use of version control. We expect to see a steady flow of sensible commits to Github over the coursework period.
-==========================
+*You will be awarded a considerable number of marks for your distribution and use of version control. We expect to see a steady flow of sensible commits to Github over the coursework period.*
 
-*Testing your work*
-==========================
+*DevOps practices encourage committing early and often to support automated builds and continuous integration. Even though automation is not assessed here, following such habits mirrors real-world software engineering practice.*
+
+### Testing your work
 You *must* produce link:https://rest-assured.io[REST Assured] tests for testing your application. These tests will be executed as part of your Maven build.
-==========================
 
-== General Process
-You should build on the _CSC8104 Quickstart Project_ from the tutorial. You do not have time to create a new application from scratch. Don't worry about renaming the packages or the OpenShift application name, doing so is likely to get you into a mess.
+## General Process
+You should build on the *CSC8104 Quickstart Project* from the tutorial. You do not have time to create a new application from scratch. Don't worry about renaming the packages or the OpenShift application name, doing so is likely to get you into a mess.
 
 The easiest way to work, is to run your application locally during development. Only create new builds from your code in OpenShift periodically, when you have a new set of features working and all your tests pass. This is especially important for part three, as you will cause your colleagues problems if your service becomes unavailable.
 
-== Notes
+*Consider how your deployment process might be automated. For example, OpenShift provides build pipelines that can automatically deploy new versions of your application once tests pass. Understanding this integration aligns with DevOps principles of automated deployment and reliability.*
 
+## Notes
 During parts 1 & 2 you will only test your API through REST Assured tests and one of the other methods presented to you during the tutorial (The Swagger documentation or CURL).
 
+*You may also wish to explore OpenShift’s built-in logging or monitoring tools to observe how your deployed service behaves — a useful aspect of DevOps observability.*
 
 == Part 1
 
@@ -173,6 +171,7 @@ If either Entity should fail to be persisted, you should rollback the transactio
 * Why are transactions useful here? What scenario do they help to prevent.
 * What is the advantage of the JTA? How might it help when using multiple distinct transactional services?
 * Discuss the benefits and drawbacks of using JPA @Annotations to automatically handle entity relationships. Highlight any pitfalls you encountered.
+* Briefly reflect on how automated build and deployment practices (DevOps) could simplify testing or deploying transactional services like these.
 
 === Testing Hints
 
