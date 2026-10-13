@@ -195,3 +195,32 @@ To give you an example of how you might use cURL to see what your API is doing, 
 The *-v* switch instructs curl to display all possible information, whilst the *-X* switch allows you to specify the HTTP method to be used and *-d* the data to be sent.
 
 TIP: If you would like to learn more about how to use cURL, you can refer to the link:http://curl.haxx.se/docs/manpage.html[official documentation].
+
+
+== Understanding the Contacts Quickstart with GitHub Copilot
+
+=== Introduction
+link:Understanding_the_Contacts_Quickstart.md[Understanding the Contacts Quickstart]
+
+This tutorial builds on the existing Contacts Quickstart and helps you understand how the Quarkus application works using GitHub Copilot.
+
+You will explore the application structure, HTTP requests, database operations and error handling while learning to question and verify Copilot's explanations.
+
+*Estimated time:* 60–90 minutes.
+
+link:Understanding_the_Contacts_Quickstart.md[Understanding the Contacts Quickstart]
+
+IMPORTANT: Complete the existing Contacts Quickstart before starting this tutorial, and finish this tutorial before beginning your coursework.
+
+=== What you will do
+
+* Explore the application code and predict its behaviour.
+* Use GitHub Copilot to explain unfamiliar concepts.
+* Check Copilot's responses against the code and supplied evidence.
+* Record your findings in your own words.
+
+Some exercises use a separate evidence pack containing sanitised logs and code extracts.
+
+link:Contacts_Copilot_Student_Evidence_Sanitised.html[View the supplied evidence]
+
+Remember: Copilot is a learning assistant, not a replacement for your own understanding.
