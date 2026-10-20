@@ -39,7 +39,7 @@ To create a Red Hat account and access the developer sandbox environment:
 2. Click the Launch your Developer Sandbox for Red Hat OpenShift button
 3. Click Register for a Red Hat account
 3. Complete all setup steps, including confirming your email address
-4. Send an email to Adam Booth (A.Booth2@newcastle.ac.uk) with your *student number*, *GitHub Username*, and *Red Hat Login ID*
+4. Send an email to Adam Booth (adam.booth@newcastle.ac.uk) with your *student number*, *GitHub Username*, and *Red Hat Login ID*
 
 At this stage you will be waiting for provisioning to continue. Once we have setup a project and provided you with access you will receive an email confirmation.
 
