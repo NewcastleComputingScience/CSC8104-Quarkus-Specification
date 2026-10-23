@@ -14,9 +14,17 @@ Complete this page after finishing the existing Contacts Quickstart and before s
 
 This tutorial helps you understand the code you have just used before you begin adapting it for the coursework. It is not a replacement for the original quickstart and it is not a shortcut for completing coursework.
 
-# Technical baseline
 
-Use the Java and Quarkus versions specified in the existing Contacts Quickstart and its project configuration. The exact versions have not been verified from the materials supplied here; teaching staff should confirm them against the repository build file and quickstart before publishing this page. Do not change the project configuration unless teaching staff ask you to do so.
+## Technical baseline
+
+This tutorial uses the same technical setup as the existing Contacts Quickstart:
+
+- **Java:** 17
+- **Contacts Quickstart:** v1.0.4
+- **Quarkus:** 2.10.3.Final
+
+Use the project configuration provided in the original quickstart. Do not upgrade or modify the dependencies unless instructed by the teaching team.
+
 
 # How to access GitHub Copilot in this activity
 
