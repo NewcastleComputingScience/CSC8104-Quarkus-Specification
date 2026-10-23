@@ -221,6 +221,6 @@ IMPORTANT: Complete the existing Contacts Quickstart before starting this tutori
 
 Some exercises use a separate evidence pack containing sanitised logs and code extracts.
 
-link:Contacts_Copilot_Student_Evidence_Sanitised.html[View the supplied evidence]
+link:Student_evidence_pack.md[Student Evidence Pack]
 
 Remember: Copilot is a learning assistant, not a replacement for your own understanding.
