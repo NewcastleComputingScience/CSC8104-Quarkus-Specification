@@ -117,4 +117,7 @@ Response.ResponseBuilder builder = Response
 
 return builder.build();
 ```
-Students can infer that the HTTP status comes from e.getStatus(). They must then inspect ErrorMessage.java or the actual HTTP response to confirm that the response body is built from the error and reasons fields.
+
+**Questions to consider:**
+
+Where does the HTTP status come from, and what additional code would you inspect to establish the response body?
