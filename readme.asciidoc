@@ -25,22 +25,3 @@ This document tells the students what they need to do during the coursework.
 
 link:./coursework.asciidoc[View the coursework document]
 
-== Model Answer
-The model answer shows a completed version of the coursework.
-This *MUST NOT* be show to the students, it's sole purpose is to educate teaching staff on what we think a good solution looks like. The model answer is in a private repo. You need to contact paul.robinson@redhat.com to gain access.
-
-https://github.com/NewcastleComputingScience/csc8104-model/tree/master/contacts-swagger[View model answer]
-
-== Marking Scheme
-There is also a suggested marking scheme.
-This is the one used by Newcaslte University.
-You are free to use it as is, modify it for your needs, or come up with an entirely new one.
-
-Contact paul.robinson@redhat.com to obtain this document.
-
-== Building docs
-The following command builds the html version of this coursework:
-
-    asciidoctor -a stylesheet=./stylesheets/riak.css ./coursework.asciidoc
-    asciidoctor -a stylesheet=./stylesheets/riak.css ./tutorial.asciidoc
-    asciidoctor -a stylesheet=./stylesheets/riak.css ./frequentlyaskedquestions.asciidoc
