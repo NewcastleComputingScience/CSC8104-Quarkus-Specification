@@ -36,15 +36,14 @@ To create a Red Hat account and access the developer sandbox environment:
 1. Navigate to: https://developers.redhat.com/developer-sandbox/get-started
 2. Click the Launch your Developer Sandbox for Red Hat OpenShift button
 3. Click Register for a Red Hat account
-3. Complete all setup steps, including confirming your email address
-4. Send an email to Adam Booth (adam.booth@newcastle.ac.uk) with your *student number*, *GitHub Username*, and *Red Hat Login ID*
+4. Complete all setup steps, including confirming your email address
+5. Send an email to Adam Booth (adam.booth@newcastle.ac.uk) with your *student number*, *GitHub Username*, and *Red Hat Login ID*
 
 At this stage you will be waiting for provisioning to continue. Once we have setup a project and provided you with access you will receive an email confirmation.
 
-NOTE: Please return to this section once you have completed the steps below, up to and including <<repository_setup>>. You should be able to run the contacts-swagger quickstart locally, and have your code available within your Git repository.
+NOTE: Please continue with the steps below, up to and including <<repository_setup>>. You should then be able to run the contacts-swagger quickstart locally, and have your code available within your Git repository.
 
-*Once you have completed the steps below, you will now be able to proceed to setup a new build of the quickstart on OpenShift, by following the guide link:./openshift_setup.asciidoc[here].*
-
+*Once you have completed the steps below, you will now be able to proceed to setup a new build of the quickstart on OpenShift, by following the <<openshift_deploy>> section.*
 
 == Environment Setup
 
@@ -104,7 +103,120 @@ WARNING: There are two directories, .mvn and .s2i, which are required when deplo
 
 TIP: If you are new to Git, you should read Pro Git. Chapters 1-3 should cover all the functionality required for this coursework.  Available at: http://git-scm.com/book
 
-*Now you have the quickstart code within your private GitHub repository, you can return to the <<openshift>> section to setup your build.*
+*Now you have the quickstart code within your private GitHub repository, you can continue to the <<openshift_deploy>> section to setup your build.*
+
+== Deploying to OpenShift [[openshift_deploy]]
+
+_This section applies to **all students**_
+
+OpenShift 4 is RedHat's Platform as a Service (PaaS) offering. The system wraps around Kubernetes, and so some of the commands and terminology used refers to the underlying infrastructure. The system consists of deploying applications from images where we can easily recreate and scale up and down services. A service can consist of many different 'pods', which are instances of our application to permit distribution of load. For more information see link:https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/[What is Kubernetes?]. For your coursework, you will have a single service running which will contain your API.
+
+In this module your application is deployed as an *OpenShift Serverless* service (built on link:https://knative.dev/docs/serving/[Knative Serving]). OpenShift uses Source-to-Image (S2I) to build your Quarkus application directly from your GitHub repository into an image, and then runs that image as a Knative Service (shown as *KSVC* in the web console). A serverless service automatically scales down to zero pods when it is not being used, and starts a new pod again when it next receives a request.
+
+Make sure that you fully complete the instructions listed here, up to the point where you must email Adam Booth (adam.booth@newcastle.ac.uk) with your Route information!
+
+Once you have completed the instructions here you should expect your OpenShift resources to be similar to the following image.
+
+image::images/openshift-overview_quarkus.png["OpenShift Overview",align="center"]
+
+NOTE: The names shown in the image above (and in the screenshots throughout this section) will differ from yours. OpenShift names your build, image stream, service and route after your GitHub repository.
+
+=== Initial Setup
+
+==== Accessing the OpenShift Console
+
+At this stage you should have the accounts setup and the required applications installed to deploy your application to OpenShift. If you are not currently at this stage please refer to the <<openshift>> and <<repository_setup>> sections above.
+
+Once your OpenShift account has been successfully provisioned (as mentioned above), you will have the option to access the web console. To do this, log in to the link:https://sandbox.redhat.com[Red Hat Developer Sandbox] and press the 'Try it' button on the *OpenShift* card.
+
+image::images/serverless/sandbox-login.png["Red Hat Developer Sandbox",align="center"]
+
+This will open the OpenShift web console on your project, which will be named after your Red Hat username followed by `-dev`. The project overview page shows the details of your project, along with an inventory of the resources it contains.
+
+image::images/serverless/project-overview.png["OpenShift Project Overview",align="center"]
+
+TIP: You can return to this page at any time by navigating to *Home -> Projects* and selecting your project.
+
+==== GitHub Access Token [[github_token]]
+
+To permit OpenShift to access and view your private repositories, you must create a personal access token. This provides a secure method for an application to authenticate itself either over HTTPS calls or through the use of the Git API. We will use a *fine-grained* personal access token, which can be restricted to only your coursework repository and given read-only access. To do this:
+
+. In GitHub, click your profile picture in the top right corner and select 'Settings'
++
+image::images/serverless/github-account-settings.png["GitHub Account Settings",align="center"]
+
+. Scroll to the bottom of the left-hand menu and select 'Developer settings'
++
+image::images/serverless/github-developer-settings.png["GitHub Developer Settings",align="center"]
+
+. Select *Personal access tokens -> Fine-grained tokens*, then press 'Generate new token'
++
+image::images/serverless/github-fine-grained-tokens.png["GitHub Fine-grained Tokens",align="center"]
+
+. Give the token an appropriate name, such as 'OpenShift', and set the token options as follows:
++
+--
+* *Resource owner*: your GitHub account
+* *Expiration*: a date after the end of the module. OpenShift uses this token every time it builds your application, so if the token expires you will no longer be able to deploy new versions of your code
+* *Repository access*: select 'Only select repositories' and choose your private coursework repository
+* *Permissions*: press 'Add permissions' and add *Contents* and *Webhooks*, both with `Read-only` access. *Metadata* is added automatically as `Read-only` and is required
+
+image::images/serverless/github-token-permissions.png["Create Fine-grained Token",align="center"]
+--
+
+. Press 'Generate token'
+
+IMPORTANT: Make sure you either copy the token or do not navigate away from this page for now! As GitHub states, you will only have access to the token while on that page
+
+==== Create a New Secret [[openshift_secret]]
+
+We need to create a secret using this GitHub token, which we can then use to permit builds from our source code.
+
+To do this, navigate to the Secrets page shown on the OpenShift web interface. You can find this by scrolling down the project overview page and clicking the 'Secrets' link in the *Inventory* section, or by navigating to *Workloads -> Secrets*.
+
+image::images/serverless/project-inventory-secrets.png["Project Inventory",align="center"]
+
+Once on this page, press the 'Create' button in the top right section and select 'Source secret'.
+
+image::images/serverless/secrets-create-source-secret.png["Create Source Secret",align="center"]
+
+Set the secret name to 'csc8104' and leave the Authentication type as 'Basic authentication'. You may enter your GitHub username into the Username text field, however this is optional when using a fine-grained token. Finally, paste the access token created in the previous step into the 'Password or token' field and click create.
+
+image::images/serverless/source-secret-form.png["Source Secret Details",align="center"]
+
+This will create a secret which will be used to fetch, build and deploy your application from your private repository.
+
+=== Deploying the Quickstart
+
+The next stage is to deploy the application. To do this, press the 'Quick create' (*+*) button shown at the top of the OpenShift web interface and then select 'Import from Git'.
+
+image::images/serverless/quick-create-import-from-git.png["Import from Git",align="center"]
+
+Paste in your private GitHub repository URL and then expand the 'Show advanced Git options'. In the advanced options, press the 'Source Secret' dropdown and select the previously generated `csc8104` secret. This will enable OpenShift to access the repository and determine the build type, and the Git Repo URL will be marked as 'Validated'.
+
+image::images/serverless/import-from-git-options.png["Import from Git Options",align="center"]
+
+After selecting the source secret, you should now see that OpenShift has detected a builder image (*Red Hat OpenJDK 17*) and pre-configured various route and deployment options. Leave all these options as provided, ensuring that the resource type is set to *Serverless Deployment*, and press create. This will generate a new build configuration, start building your application using S2I, and create a serverless service on the platform accessible by the route provided.
+
+You will then be taken to the *Topology* view, where you can see your new serverless service (*KSVC*). Selecting it shows the current build, the revisions of your service, and the route for your application.
+
+image::images/serverless/topology-build-and-route.png["Topology View",align="center"]
+
+TIP: The first build can take several minutes. While it is running the service will show 'No Revisions'. You can see the progress of the build by clicking 'View logs' next to the running build.
+
+WARNING: You have been given access to create multiple pods to allow for rolling deployment. Please *DO NOT* scale your system to use multiple pods to run your application.
+
+To access the public URL given for your application, copy the Location value shown under *Routes* in the Topology view. You can also find this by navigating to *Serverless -> Serving* and copying the URL for your service.
+
+Once the build has completed, opening the route in your browser should show the Quarkus welcome page.
+
+image::images/serverless/quarkus-welcome-page.png["Quarkus Welcome Page",align="center"]
+
+To check that your API is working, append `/q/swagger-ui` to the end of the route URL. This will show the Swagger UI for your service, from which you can test each of your endpoints.
+
+image::images/serverless/swagger-ui.png["Swagger UI",align="center"]
+
+IMPORTANT: *Once you have completed this stage and have a link to the route for your service, please email Adam Booth (adam.booth@newcastle.ac.uk) as soon as possible! He will append this to the document https://github.com/NewcastleComputingScience/csc8104-assignment[here], where you will be able to find links to your colleagues services for Part III*
 
 == Eclipse Setup
 
