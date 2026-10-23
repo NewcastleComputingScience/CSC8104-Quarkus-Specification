@@ -18,8 +18,6 @@ NOTE: The names shown in the image above (and in the screenshots throughout this
 
 === Environment Setup
 
-link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=24m09s[Tutorial Video - 24m09s]
-
 At this stage you should have the accounts setup and the required applications installed to deploy your application to OpenShift. If you are not currently at this stage please refer to the link:./tutorial.asciidoc[tutorial] document.
 
 Once your OpenShift account has been successfully provisioned (as mentioned above), you will have the option to access the web console. To do this, log in to the link:https://sandbox.redhat.com[Red Hat Developer Sandbox] and press the 'Try it' button on the *OpenShift* card.
@@ -34,8 +32,6 @@ TIP: You can return to this page at any time by navigating to *Home -> Projects*
 
 
 === GitHub Access Token [[github_token]]
-
-link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=25m47s[Tutorial Video - 25m47s]
 
 To permit OpenShift to access and view your private repositories, you must create a personal access token. This provides a secure method for an application to authenticate itself either over HTTPS calls or through the use of the Git API. We will use a *fine-grained* personal access token, which can be restricted to only your coursework repository and given read-only access. To do this:
 
@@ -61,8 +57,6 @@ IMPORTANT: Make sure you either copy the token or do not navigate away from this
 
 === Create a New Secret [[openshift_secret]]
 
-link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=27m00s[Tutorial Video - 27m00s]
-
 We need to create a secret using this GitHub token, which we can then use to permit builds from our source code.
 
 To do this, navigate to the Secrets page shown on the OpenShift web interface. You can find this by scrolling down the project overview page and clicking the 'Secrets' link in the *Inventory* section, or by navigating to *Workloads -> Secrets*.
@@ -81,8 +75,6 @@ This will create a secret which will be used to fetch, build and deploy your app
 
 
 == Deploying the Quickstart
-
-link:https://www.youtube.com/watch?v=2SkR8hDCpvA&t=27m54s[Tutorial Video - 27m54s]
 
 The next stage is to deploy the application. To do this, press the 'Quick create' (*+*) button shown at the top of the OpenShift web interface and then select 'Import from Git'.
 

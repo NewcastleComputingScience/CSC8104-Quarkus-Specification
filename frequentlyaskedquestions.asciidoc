@@ -78,7 +78,7 @@ When adding new packages for your new restful resources, make sure to add them t
 
 == I am getting a 500 error when trying to `POST` a resource in Swagger
 
-As mentioned in the tutorial video, swagger will try and include the `id` field in its default json object when `POST` ing a new resource. This is not allowed by the service, as the database will set Entity `id` fields itself. You should remove this line from the sample json input in Swagger's interactive `POST` request forms.
+Swagger will try and include the `id` field in its default json object when `POST` ing a new resource. This is not allowed by the service, as the database will set Entity `id` fields itself. You should remove this line from the sample json input in Swagger's interactive `POST` request forms.
 When you have done this - if the POST request still returns a 500 response - seek demonstrator help.
 
 == I can't access `h2console`

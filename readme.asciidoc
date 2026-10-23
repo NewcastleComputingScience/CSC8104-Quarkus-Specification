@@ -20,10 +20,6 @@ This sample application is then used to build upon during the coursework.
 
 link:./tutorial.asciidoc[View the tutorial document]
 
-There is also a video available to https://www.youtube.com/watch?v=2SkR8hDCpvA[watch here].
-In this video a member of staff, at Newcastle University, walks through the tutorial with the students.
-This video has a few Newcastle specific bits in, but could be valuable to your students anyway, providing they understand this caveat.
-
 == Coursework
 This document tells the students what they need to do during the coursework.
 
