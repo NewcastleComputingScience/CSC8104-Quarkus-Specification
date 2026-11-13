@@ -240,10 +240,10 @@ Prior to submission you will provide a 10-15 minute demonstration to one of the 
 A sign-up sheet for demonstration slots will be sent via email during the first week of practical sessions. It is very important that you demonstrate your work, failing to do so may result in a loss of marks.
 
 === Coursework submission
-You must submit all work via the coursework submission system (NESS).
+You must submit all work via the coursework submission system (Canvas).
 This should constitute a zip file containing the project source code and Maven build scripts. We will use this zip file to test your submission, so it should contain everything necessary to build and test your project.
 
-You should also submit a short report via NESS (roughly three pages) summarising the work carried out on this project, and an evaluation of how much you achieved. We are particularly interested in any assumptions you made, and how they motivated particular design decisions. You should also provide a brief discussion of your personal experience of the development process; e.g. which aspects of the project did you find particularly easy/hard?
+You should also submit a short report via Canvas (roughly three pages) summarising the work carried out on this project, and an evaluation of how much you achieved. We are particularly interested in any assumptions you made, and how they motivated particular design decisions. You should also provide a brief discussion of your personal experience of the development process; e.g. which aspects of the project did you find particularly easy/hard?
 
 We have provided a list of things you should cover in your report in the "Report Hints" sections of this document.
 
